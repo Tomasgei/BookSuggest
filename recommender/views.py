@@ -45,13 +45,26 @@ def Book_Detail(request,pk):
     obj =Book.objects.get(pk=pk)
     bookname = obj.title
     engine = BookSuggestionEngine(bookname)
-    pivot = engine.prepare_data()
-    suggested_books = list(pivot)
+    suggested_books = engine.prepare_data()
     
-    #get object in database
-    #for b in pivot:
-        #suggested_books.append(b)
-    
+    book_1 = suggested_books[0][1]
+    book_2 = suggested_books[0][2]
+    book_3 = suggested_books[0][3]
+    book_4 = suggested_books[0][4]
 
-    context = {"obj":obj,"suggested_books":suggested_books }
+    
+    get_book_image_1 = Book.objects.filter(title=book_1).order_by("id").first()
+    book_image_1 = get_book_image_1.image_m
+    get_book_image_2 = Book.objects.filter(title=book_2).order_by("id").first()
+    book_image_2 = get_book_image_2.image_m
+    get_book_image_3 = Book.objects.filter(title=book_3).order_by("id").first()
+    book_image_3 = get_book_image_3.image_m
+    get_book_image_4 = Book.objects.filter(title=book_4).order_by("id").first()
+    book_image_4 = get_book_image_4.image_m
+
+    context = {"obj":obj,"suggested_books":suggested_books,
+    "book_image_1":book_image_1,
+    "book_image_2":book_image_2,
+    "book_image_3":book_image_3,
+    "book_image_4":book_image_4 }
     return render(request,"book.html",context )
