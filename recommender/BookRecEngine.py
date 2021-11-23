@@ -98,7 +98,9 @@ if __name__ == '__main__':
     c = a.book_suggestions(b)
     print(c)
 """
+"""
 if __name__ == '__main__':
     qs = Book.objects.all()
     df = qs.to_dataframe()
     print(df.head())
+"""
